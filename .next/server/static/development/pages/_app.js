@@ -161,13 +161,14 @@ function getOrCreateStore(initialState) {
   }
 
   withReduxApp.getInitialProps = async ctx => {
+    const reduxStore = getOrCreateStore();
+    ctx.reduxStore = reduxStore;
     let appProps = {};
 
     if (typeof Comp.getInitialProps === "function") {
       appProps = await Comp.getInitialProps(ctx);
     }
 
-    const reduxStore = getOrCreateStore();
     return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, appProps, {
       initialReduxState: reduxStore.getState()
     });
@@ -2276,6 +2277,103 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
 
 /***/ }),
 
+/***/ "./store/reducers/countReducer.js":
+/*!****************************************!*\
+  !*** ./store/reducers/countReducer.js ***!
+  \****************************************/
+/*! exports provided: countState, addAsync, countReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "countState", function() { return countState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addAsync", function() { return addAsync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "countReducer", function() { return countReducer; });
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+
+const countState = {
+  count: 0
+};
+const addAsync = value => {
+  console.log("addAsync is triggered", value);
+  return dispatch => {
+    setTimeout(() => {
+      dispatch({
+        type: "add",
+        payload: value
+      });
+    }, 1500);
+  };
+};
+const countReducer = (state = countState, action) => {
+  switch (action.type) {
+    case "add":
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+        count: state.count + action.payload
+      });
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
+/***/ "./store/reducers/rootReducer.js":
+/*!***************************************!*\
+  !*** ./store/reducers/rootReducer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _countReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./countReducer */ "./store/reducers/countReducer.js");
+/* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./userReducer */ "./store/reducers/userReducer.js");
+
+
+
+const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
+  count: _countReducer__WEBPACK_IMPORTED_MODULE_1__["countReducer"],
+  user: _userReducer__WEBPACK_IMPORTED_MODULE_2__["userReducer"]
+});
+/* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./store/reducers/userReducer.js":
+/*!***************************************!*\
+  !*** ./store/reducers/userReducer.js ***!
+  \***************************************/
+/*! exports provided: userInitialState, userReducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userInitialState", function() { return userInitialState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userReducer", function() { return userReducer; });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
+
+const userInitialState = {
+  username: "ming"
+};
+const userReducer = (state = userInitialState, action) => {
+  switch (action.type) {
+    case "update_name":
+      return {
+        username: action.payload
+      };
+
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./store/store.js":
 /*!************************!*\
   !*** ./store/store.js ***!
@@ -2288,22 +2386,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return initializeStore; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
-/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
+/* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./reducers/rootReducer */ "./store/reducers/rootReducer.js");
+/* harmony import */ var _reducers_countReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./reducers/countReducer */ "./store/reducers/countReducer.js");
+/* harmony import */ var _reducers_userReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./reducers/userReducer */ "./store/reducers/userReducer.js");
 
 
 
 
 
-const initialState = {
-  count: 0,
-  username: "ming"
-};
+
+
 
 const logger = store => next => action => {
   if (typeof action === "function") {
@@ -2316,44 +2414,22 @@ const logger = store => next => action => {
   console.log("nextState", store.getState());
 };
 
-const addAsync = value => {
-  console.log("addAsync is triggered", value);
-  return dispatch => {
-    setTimeout(() => {
-      dispatch({
-        type: "add",
-        payload: value
-      });
-    }, 1500);
-  };
-};
-
-const reducer = (state = {}, action) => {
-  switch (action.type) {
-    case "add":
-      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-        count: state.count + action.payload
-      });
-
-    case "update_name":
-      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state, {
-        username: action.payload
-      });
-
-    default:
-      return state;
-  }
-};
-
-addAsync(2);
 function initializeStore(state) {
-  const store = Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(reducer, _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, initialState, state), Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_4__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(logger, redux_thunk__WEBPACK_IMPORTED_MODULE_3___default.a)));
+  const store = Object(redux__WEBPACK_IMPORTED_MODULE_1__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_4__["default"], _babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default()({}, {
+    count: _reducers_countReducer__WEBPACK_IMPORTED_MODULE_5__["countState"],
+    user: _reducers_userReducer__WEBPACK_IMPORTED_MODULE_6__["userInitialState"]
+  }, state), Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_1__["applyMiddleware"])(logger, redux_thunk__WEBPACK_IMPORTED_MODULE_2___default.a)));
   store.subscribe(() => {
     console.log("changed", store.getState());
   });
   store.dispatch({
     type: "add",
-    payload: 5
+    payload: 1
+  });
+  store.dispatch(Object(_reducers_countReducer__WEBPACK_IMPORTED_MODULE_5__["addAsync"])(2));
+  store.dispatch({
+    type: "update_name",
+    payload: "ying"
   });
   return store;
 }

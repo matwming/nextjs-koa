@@ -3,8 +3,8 @@ import Router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 
 export default () => {
-  const count = useSelector(state => state.count);
-  const username = useSelector(state => state.username);
+  const count = useSelector(state => state.count.count);
+  const user = useSelector(state => state.user.username);
   const dispatch = useDispatch();
   console.log("index_store", count);
   return (
@@ -21,12 +21,13 @@ export default () => {
       >
         a
       </button>
-      <p>username is : {username}</p>
+      <p>username is : {user}</p>
+      <p>store count :{count}</p>
       <button onClick={() => dispatch({ type: "add" })}>change state</button>
       <button
-        onClick={() => dispatch({ type: "update_name", payload: "ying" })}
+        onClick={() => dispatch({ type: "update_name", payload: "george" })}
       >
-        change name to ying
+        change name to george
       </button>
       <Link href="/b/b">
         <button>b</button>

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2060,8 +2060,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  const count = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.count);
-  const username = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.username);
+  const count = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.count.count);
+  const user = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => state.user.username);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   console.log("index_store", count);
   return __jsx("div", null, __jsx("button", {
@@ -2073,23 +2073,23 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
         }
       });
     }
-  }, "a"), __jsx("p", null, "username is : ", username), __jsx("button", {
+  }, "a"), __jsx("p", null, "username is : ", user), __jsx("p", null, "store count :", count), __jsx("button", {
     onClick: () => dispatch({
       type: "add"
     })
   }, "change state"), __jsx("button", {
     onClick: () => dispatch({
       type: "update_name",
-      payload: "ying"
+      payload: "george"
     })
-  }, "change name to ying"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "change name to george"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/b/b"
   }, __jsx("button", null, "b")));
 });
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

@@ -12852,10 +12852,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var count = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(function (state) {
-    return state.count;
+    return state.count.count;
   });
-  var username = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(function (state) {
-    return state.username;
+  var user = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(function (state) {
+    return state.user.username;
   });
   var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useDispatch"])();
   console.log("index_store", count);
@@ -12868,7 +12868,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
         }
       });
     }
-  }, "a"), __jsx("p", null, "username is : ", username), __jsx("button", {
+  }, "a"), __jsx("p", null, "username is : ", user), __jsx("p", null, "store count :", count), __jsx("button", {
     onClick: function onClick() {
       return dispatch({
         type: "add"
@@ -12878,17 +12878,17 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
     onClick: function onClick() {
       return dispatch({
         type: "update_name",
-        payload: "ying"
+        payload: "george"
       });
     }
-  }, "change name to ying"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, "change name to george"), __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/b/b"
   }, __jsx("button", null, "b")));
 });
 
 /***/ }),
 
-/***/ 1:
+/***/ 2:
 /*!**********************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fbmyg%2FDesktop%2Fnextjs%2Fpages%2Findex.js ***!
   \**********************************************************************************************************************/
@@ -12911,5 +12911,5 @@ module.exports = dll_b35e09dc2ca94ac6d9c1;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=index.js.map
