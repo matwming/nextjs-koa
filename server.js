@@ -9,6 +9,7 @@ const router = new Route();
 
 const handle = app.getRequestHandler();
 
+let index=0;
 app.prepare().then(() => {
   const server = new Koa();
   const router = new Route();
@@ -30,6 +31,8 @@ app.prepare().then(() => {
     //const path=ctx.path; get path
     //const method=ctx.method;
     //ctx.body=`<span></span>`
+    ctx.cookies.set('id',index);
+    index+=1;
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
   });
